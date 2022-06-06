@@ -4,27 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6ccabae60a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/style.css" />
     <title>Momentum App</title>
 </head>
 <body>
-    <h2 id="clock">00:00:00</h2>
-    <form id="login-form" class="hidden">
-        <input required maxlength='15' type="text" placeholder="what is your name?" />
-        <input type="submit" value="Log In"></input>
-    </form>
-    <h1 id="greeting" class="hidden"></h1>
-    <form id="todo-form">
-        <input type="text" placeholder="Write a To Do and Press Enter.">
-    </form>
-    <ul id="todo-list">
-
-    </ul>
-    <div id="quote">
-        <span></span>
-        <span></span>
-    </div>
-    
+    <section class="info">
+        <div class="container">
+            <div class="time">
+                <span class="time_emoji"><i class="fa-solid fa-clock"></i></span>
+                <h2 id="clock">00:00:00</h2>
+            </div>
+            <div class="hello">
+                <span class="morning"></span>
+                <span id="greeting" class="hidden"></span>
+            </div>
+            <form id="login-form" class="hidden">
+                <input required maxlength='15' type="text" placeholder="what is your name?" />
+                <input type="submit" value="Log In"></input>
+            </form>
+            <form id="todo-form">
+                <input type="text" placeholder="Write a To Do and Press Enter.">
+            </form>
+            <ul id="todo-list">
+            </ul>
+            <div id="quote">
+                <span></span>
+                <span></span>
+            </div>
+            <div id="weather">
+                <span class="weather"></span>
+                <span class="temp"></span>
+                <span class="location"></span>
+            </div>
+        </div>
+    </section>
     <script src="js/greetings.js" defer></script>
     <script src="js/clock.js" defer></script>
     <script src="js/quotes.js" defer></script>
