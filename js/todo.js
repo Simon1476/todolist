@@ -3,6 +3,9 @@ const toDoInput = toDoForm.querySelector('input');
 const toDOList = document.getElementById('todo-list');
 
 const TODOS_KEY = 'todos';
+const TODOS_CNT = 'todoscnt';
+
+let toDosCnt = 0;   // to-do list 개수
 
 let toDos = [];
 
@@ -10,33 +13,60 @@ function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
+function changeToDo() {
 
-function deleteToDo(event) {
-   const li  = event.target.parentElement; // This li is a element li we want to delete when we click the delete button.
-   li.remove();
-   toDos = toDos.filter((item) => item.id !== parseInt(li.id));
-   saveToDos();
 }
 
+function deleteToDo(event) {
+//    const li  = event.target.parentElement; // This li is a element li we want to delete when we click the delete button.
+//    li.remove();
+//    toDos = toDos.filter((item) => item.id !== parseInt(li.id));
+//    saveToDos();
+//    toDosCnt--;
+
+    const div  = event.target.parentElement; // This li is a element li we want to delete when we click the delete button.
+    const li   = div.parentNode;  
+    li.remove();
+    toDos = toDos.filter((item) => item.id !== parseInt(li.id));
+    saveToDos();
+    toDosCnt--;
+}   
 
 function paintToDo(newTodoObj) {
 
     const li = document.createElement("li");
     const span = document.createElement("span");
+
+    const div = document.createElement("div");
     const button = document.createElement("button");
+    const changeBtn = document.createElement("button");
 
     li.id = newTodoObj.id;
     span.innerText = newTodoObj.text;
     button.innerText = "❌";
-    button.addEventListener('click', deleteToDo);
+    changeBtn.innerHTML ='<i class="fa-solid fa-pencil"></i>';
 
+    button.addEventListener('click', deleteToDo);
+    changeBtn.addEventListener('cllick', changeToDo);
+
+    div.appendChild(button);
+    div.appendChild(changeBtn);
     li.appendChild(span);
-    li.appendChild(button);
+    li.appendChild(div);
     toDOList.appendChild(li);
+    toDosCnt++; // to-do list하나 생성 시 todo-list값 증가 
+    
+    
    
 }
 
 function handleToDOSubmit(event) {
+
+    event.preventDefault();
+    if(toDosCnt >= 5) {
+        alert("You can't create todo list");
+        return;
+    }
 
     event.preventDefault();
     const newTodo = toDoInput.value;
