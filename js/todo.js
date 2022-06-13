@@ -13,7 +13,7 @@ function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
-function changeToDo(li, span, newTodoObj) {
+function changeToDo(li, span) {
 
     let id = parseInt(li.id);
 
@@ -25,21 +25,14 @@ function changeToDo(li, span, newTodoObj) {
     inputElem.addEventListener('keypress',(e)=> {
 
         if(e.key === 'Enter'){
+            const todo = toDos.find((item) => item.id === id);
+            const inputValue = inputElem.value;
 
-            span.innerText = inputElem.value;
-
+            span.innerText = inputValue;
             // newTodoObj.text = span.innerText;
-            if(toDos[0].id === id) {
-               toDos[0].text = span.innerText;
-            }   else if (toDos[1].id === id) {
-                toDos[1].text = span.innerText;
-             }  else if (toDos[2].id === id) {
-                toDos[2].text = span.innerText;
-             }  else if (toDos[3].id === id) {
-                toDos[3].text = span.innerText;
-             }  else if (toDos[4].id === id) {
-                toDos[4].text = span.innerText;
-             }
+            if( todo ) {
+                todo.text = inputValue;
+            }
             saveToDos();
             inputElem.classList.add('edit_hidden');
 
@@ -51,11 +44,11 @@ function changeToDo(li, span, newTodoObj) {
 }
 
 function deleteToDo(event) {
-//    const li  = event.target.parentElement; // This li is a element li we want to delete when we click the delete button.
-//    li.remove();
-//    toDos = toDos.filter((item) => item.id !== parseInt(li.id));
-//    saveToDos();
-//    toDosCnt--;
+    //    const li  = event.target.parentElement; // This li is a element li we want to delete when we click the delete button.
+    //    li.remove();
+    //    toDos = toDos.filter((item) => item.id !== parseInt(li.id));
+    //    saveToDos();
+    //    toDosCnt--;
 
     const div  = event.target.parentElement; // This li is a element li we want to delete when we click the delete button.
     const li   = div.parentNode;  
@@ -81,7 +74,7 @@ function paintToDo(newTodoObj) {
 
 
     button.addEventListener('click', deleteToDo);
-    changeBtn.addEventListener('click', function(){changeToDo(li, span, newTodoObj)});
+    changeBtn.addEventListener('click', function(){changeToDo(li, span)});
 
     div.appendChild(button);
     div.appendChild(changeBtn);
